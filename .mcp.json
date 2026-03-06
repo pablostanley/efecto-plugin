@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "efecto": {
+      "command": "npx",
+      "args": ["-y", "@efectoapp/mcp"]
+    }
+  }
+}
