@@ -1,18 +1,21 @@
 {
   "name": "efecto",
+  "description": "Efecto design tool — create web pages, social media graphics, and presentations with AI agents",
   "owner": {
     "name": "Pablo Stanley",
     "email": "pablo@efecto.app"
   },
-  "metadata": {
-    "description": "Efecto design tool — create web pages, social media graphics, and presentations with AI agents"
-  },
   "plugins": [
     {
       "name": "efecto",
+      "description": "Efecto design tool — create web pages with AI agents. Includes MCP server (43 tools) and 3 design skills (web design, social media, graphic design).",
+      "author": {
+        "name": "Pablo Stanley",
+        "email": "pablo@efecto.app"
+      },
       "source": "./efecto",
       "category": "design",
-      "tags": ["design", "web-design", "tailwind", "mcp", "social-media", "graphic-design"]
+      "homepage": "https://efecto.app"
     }
   ]
 }
