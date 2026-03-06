@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "efecto",
-      "source": ".",
+      "source": "./efecto",
       "description": "Efecto design tool — create web pages with AI agents. Includes MCP server (43 tools) and 3 design skills (web design, social media, graphic design).",
       "version": "1.0.0",
       "author": {
