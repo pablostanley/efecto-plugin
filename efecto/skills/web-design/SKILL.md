@@ -88,7 +88,7 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 
 ---
 
-## The 43 Design Tools
+## The 44 Design Tools
 
 ### Reading State
 
@@ -111,7 +111,7 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 
 | Tool | Purpose |
 |------|---------|
-| `update_node` | Updates any node property (className, textContent, tag, style, src, etc.) |
+| `update_node` | Updates any node property (className, textContent, tag, style, src, link, elementId, etc.) |
 | `update_class` | Shortcut: replaces only className on a node |
 | `update_artboard` | Updates artboard properties (name, size, background, className) |
 | `batch_update` | Updates multiple nodes in one call (bulk styling) |
@@ -175,6 +175,12 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 |------|---------|
 | `set_fill` | Sets the fill (background) of a node or artboard — solid color, gradient, or image. Handles dual-write automatically. |
 | `export_image` | Exports an artboard or node as an image (PNG, JPEG, WebP, SVG). Returns base64 data URL. |
+
+### Design Validation
+
+| Tool | Purpose |
+|------|---------|
+| `audit_design` | Audits design against professional quality rules: typography (scale, weight contrast, sizing), color (neutral consistency, pure black, low-contrast combos), spacing (4pt grid, touch targets), and AI slop detection (monotonous layouts). Pass `artboardId` for one artboard or omit for all. |
 
 ---
 
@@ -396,6 +402,37 @@ set_fill  targetId: "<id>"
 ```
 
 Works on both nodes and artboards. For artboards, solid fills update `backgroundColor` for backward compatibility.
+
+### Links & Anchors
+
+Any node can be made clickable with the `link` property on `add_node`, `update_node`, or `batch_update`. Use `elementId` to make a node an anchor target.
+
+| Link Type | Use Case | Required Fields |
+|-----------|----------|-----------------|
+| `url` | External URL | `url`, optional `target: "_blank"` |
+| `page` | Navigate to another artboard | `pageId` (artboard ID) |
+| `section` | Scroll to element anchor | `sectionId` (matches an `elementId`) |
+| `email` | mailto link | `email` |
+| `phone` | tel link | `phone` |
+
+```
+# Make a button link to an external URL
+update_node  nodeId: "<btn-id>"  link: { type: "url", url: "https://example.com", target: "_blank" }
+
+# Mark a section as an anchor target
+update_node  nodeId: "<section-id>"  elementId: "pricing"
+
+# Link a nav item to that anchor
+update_node  nodeId: "<nav-link-id>"  link: { type: "section", sectionId: "pricing" }
+
+# Link to another artboard (page navigation)
+update_node  nodeId: "<link-id>"  link: { type: "page", pageId: "<artboard-id>" }
+
+# Remove a link
+update_node  nodeId: "<id>"  link: null
+```
+
+Works on any node type — frames, text, images, buttons. For published sites, `page` and `section` links become real navigation.
 
 ---
 
