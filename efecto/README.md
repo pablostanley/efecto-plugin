@@ -4,7 +4,7 @@ Design web pages with AI using [Efecto](https://efecto.app) — a real-time visu
 
 ## What's Included
 
-- **MCP Server** — Full access to the Efecto design tool (44 tools for creating, modifying, and organizing designs)
+- **MCP Server** — Full access to the Efecto design tool (46 tools for creating, modifying, and organizing designs)
 - **Web Design Skill** — Comprehensive guide for building web pages and app UIs with JSX + Tailwind CSS via Efecto sessions
 - **Social Media Skill** — Platform-specific templates for Instagram, YouTube, TikTok, Twitter/X, LinkedIn, Pinterest, and Facebook
 - **Graphic Design Skill** — Presentations, pitch decks, event posters, email headers, blog heroes, OG images, and certificates

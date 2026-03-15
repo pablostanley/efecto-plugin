@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "efecto",
-      "description": "Efecto design tool — create web pages with AI agents. Includes MCP server (43 tools) and 3 design skills (web design, social media, graphic design).",
+      "description": "Efecto design tool — create web pages with AI agents. Includes MCP server (46 tools) and 3 design skills (web design, social media, graphic design).",
       "author": {
         "name": "Pablo Stanley",
         "email": "pablo@efecto.app"

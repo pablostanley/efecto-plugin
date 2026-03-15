@@ -88,7 +88,7 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 
 ---
 
-## The 44 Design Tools
+## The 46 Design Tools
 
 ### Reading State
 
@@ -181,6 +181,7 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 | Tool | Purpose |
 |------|---------|
 | `audit_design` | Audits design against professional quality rules: typography (scale, weight contrast, sizing), color (neutral consistency, pure black, low-contrast combos), spacing (4pt grid, touch targets), and AI slop detection (monotonous layouts). Pass `artboardId` for one artboard or omit for all. |
+| `repair_design` | Applies safe, deterministic fixes across the document (or one artboard) in one pass: missing w-full, missing flex, arbitrary Tailwind values → inline styles, pure black → zinc-950, touch-target bumps, placeholder images, empty text defaults. Pass `dryRun: true` to preview. |
 
 ---
 
