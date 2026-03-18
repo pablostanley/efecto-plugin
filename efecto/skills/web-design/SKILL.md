@@ -196,7 +196,7 @@ Every node maps 1:1 to an HTML element. The `type` determines behavior; the `tag
 | **image** | `img` | img | `src`, `alt`, `objectFit` |
 | **button** | `button` | button, a, div | `textContent`, `variant` |
 | **link** | `a` | a, button, div, span | `textContent`, `href`, `target` |
-| **icon** | `svg` | svg, div | `iconName` (Phosphor, PascalCase) |
+| **icon** | `svg` | svg | `iconName` (kebab-case), `iconLibrary`, `iconWeight` |
 | **input** | `input` | input, textarea, select | `placeholder`, `inputType`, `label` |
 | **video** | `video` | video | `src`, `poster`, `autoPlay`, `loop`, `muted` |
 | **component** | `div` | div | `componentId`, `overrides` |
@@ -212,8 +212,9 @@ When writing JSX for `add_section`, the HTML tag determines the node type:
 <header>    -> frame       <input>      -> input
 <footer>    -> frame       <video>      -> video
 <h1>-<h6>   -> text        <svg>        -> icon
-<p>         -> text
-<span>      -> text
+<p>         -> text        <i>          -> icon
+<span>      -> text        <Icon>       -> icon
+                           <HeartIcon>  -> icon (name resolved from tag)
 ```
 
 ---
@@ -230,6 +231,7 @@ This is the primary way to build layouts. Write standard JSX with HTML tags and 
 4. **Images are self-closing** — `<img src="https://..." alt="..." className="..." />`
 5. **Use `data-id`** only when referencing existing nodes (from `get_document`)
 6. **No React-specific syntax** — no `onClick`, `useState`, fragments, or components
+7. **Icons use `<svg>` with the `icon` attribute** — `<svg icon="arrow-right" className="w-5 h-5 text-gray-600" />`
 
 ### Example: Complete Section
 
@@ -242,19 +244,112 @@ This is the primary way to build layouts. Write standard JSX with HTML tags and 
   </div>
   <div className="flex gap-8 w-full max-w-5xl">
     <div className="flex flex-col gap-3 p-8 bg-gray-50 rounded-2xl grow">
+      <svg icon="lightning" className="w-8 h-8 text-blue-600" />
       <h3 className="text-lg font-semibold text-gray-900">Lightning Fast</h3>
       <p className="text-sm text-gray-500">Deploy in seconds, not hours. Our edge network ensures sub-50ms latency worldwide.</p>
     </div>
     <div className="flex flex-col gap-3 p-8 bg-gray-50 rounded-2xl grow">
+      <svg icon="shield-check" className="w-8 h-8 text-blue-600" />
       <h3 className="text-lg font-semibold text-gray-900">Enterprise Security</h3>
       <p className="text-sm text-gray-500">SOC 2 certified with end-to-end encryption. Your data stays yours.</p>
     </div>
     <div className="flex flex-col gap-3 p-8 bg-gray-50 rounded-2xl grow">
+      <svg icon="headset" className="w-8 h-8 text-blue-600" />
       <h3 className="text-lg font-semibold text-gray-900">24/7 Support</h3>
       <p className="text-sm text-gray-500">Our team is always on. Get answers in minutes, not days.</p>
     </div>
   </div>
 </section>
+```
+
+---
+
+## Icons
+
+Efecto supports 4 icon libraries with ~9,400 icons total. Icons render as SVG and inherit color from `currentColor`.
+
+### How to Write Icons in JSX
+
+The canonical format:
+```jsx
+<svg icon="arrow-right" className="w-5 h-5 text-gray-600" />
+```
+
+- **`icon`** — Icon name in **kebab-case** (e.g. `arrow-right`, `magnifying-glass`, `google-logo`)
+- **`className`** — Size via `w-*` / `h-*`, color via `text-*` classes
+- **`iconLibrary`** — Optional: `phosphor` (default), `lucide`, `heroicons`, `radix`
+- **`iconWeight`** — Optional: `thin`, `light`, `regular` (default), `bold`, `fill`, `duotone` (Phosphor only)
+
+### Common Icon Names (Phosphor — default library)
+
+| Category | Icons |
+|----------|-------|
+| **Arrows** | `arrow-right`, `arrow-left`, `arrow-up`, `arrow-down`, `caret-right`, `caret-down` |
+| **Actions** | `check`, `x`, `plus`, `minus`, `magnifying-glass`, `funnel`, `pencil`, `trash` |
+| **UI** | `gear`, `sliders`, `dots-three`, `list`, `squares-four`, `sidebar` |
+| **Social** | `google-logo`, `apple-logo`, `github-logo`, `x-logo`, `linkedin-logo`, `discord-logo`, `facebook-logo`, `instagram-logo`, `youtube-logo` |
+| **Objects** | `envelope`, `lock`, `eye`, `eye-slash`, `star`, `heart`, `user`, `users`, `house`, `lightning`, `fire`, `rocket` |
+| **Media** | `image`, `camera`, `play`, `pause`, `microphone`, `speaker-high` |
+| **Commerce** | `shopping-cart`, `credit-card`, `currency-dollar`, `receipt`, `package` |
+
+### Icon Sizing Guide
+
+```
+w-3 h-3     /* 12px — tiny, inline indicators */
+w-4 h-4     /* 16px — inline with small text */
+w-5 h-5     /* 20px — standard UI icon */
+w-6 h-6     /* 24px — default, comfortable */
+w-8 h-8     /* 32px — feature icons, cards */
+w-10 h-10   /* 40px — hero feature icons */
+w-12 h-12   /* 48px — large decorative */
+w-16 h-16   /* 64px — hero section centerpiece */
+```
+
+### Icon Patterns in Sections
+
+**Feature card with icon:**
+```jsx
+<div className="flex flex-col gap-3 p-8 bg-gray-50 rounded-2xl grow">
+  <svg icon="lightning" className="w-8 h-8 text-blue-600" />
+  <h3 className="text-lg font-semibold text-gray-900">Lightning Fast</h3>
+  <p className="text-sm text-gray-500">Deploy in seconds, not hours.</p>
+</div>
+```
+
+**Button with icon (icons are siblings, not children):**
+```jsx
+<div className="flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-lg">
+  <span className="text-sm font-medium">Get Started</span>
+  <svg icon="arrow-right" className="w-4 h-4" />
+</div>
+```
+
+**Social icons row:**
+```jsx
+<div className="flex items-center gap-4">
+  <svg icon="x-logo" className="w-5 h-5 text-gray-400" />
+  <svg icon="github-logo" className="w-5 h-5 text-gray-400" />
+  <svg icon="linkedin-logo" className="w-5 h-5 text-gray-400" />
+  <svg icon="discord-logo" className="w-5 h-5 text-gray-400" />
+</div>
+```
+
+**Input with icon:**
+```jsx
+<div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 bg-white">
+  <svg icon="magnifying-glass" className="w-4 h-4 text-gray-400" />
+  <input placeholder="Search..." className="text-sm text-gray-900 grow" />
+</div>
+```
+
+**Using a different library (Lucide):**
+```jsx
+<svg icon="check" iconLibrary="lucide" className="w-5 h-5 text-green-600" />
+```
+
+**Using a weight variant (Phosphor bold):**
+```jsx
+<svg icon="star" iconWeight="fill" className="w-5 h-5 text-yellow-500" />
 ```
 
 ---
@@ -705,7 +800,13 @@ Note: The system auto-converts arbitrary hex to inline styles, but prefer named 
 Frame types (div, section, nav, header, footer) cannot hold text directly. Use text nodes (h1, p, span) inside them.
 
 **Button nodes ignore children**
-The button renderer only uses `textContent`. Do not nest icons or other elements inside buttons — place them as siblings.
+The button renderer only uses `textContent`. Do not nest icons or other elements inside buttons — wrap them in a flex container instead:
+```jsx
+<div className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg">
+  <span className="text-sm font-medium">Continue</span>
+  <svg icon="arrow-right" className="w-4 h-4" />
+</div>
+```
 
 **Top-level sections need `w-full`**
 The auto-fixer adds this, but always include `w-full` on direct children of the artboard so they span the full width.
