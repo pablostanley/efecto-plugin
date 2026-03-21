@@ -1,0 +1,18 @@
+{
+  "name": "efecto",
+  "displayName": "Efecto",
+  "version": "1.0.0",
+  "description": "Design with AI agents inside Cursor — web pages, social media, presentations, and more",
+  "author": {
+    "name": "Pablo Stanley",
+    "email": "pablo@efecto.app"
+  },
+  "homepage": "https://efecto.app",
+  "repository": "https://github.com/pablostanley/efecto-plugin",
+  "license": "MIT",
+  "keywords": ["design", "web-design", "tailwind", "mcp", "efecto"],
+  "category": "design",
+  "logo": "assets/logo.svg",
+  "mcpServers": "mcp.json",
+  "skills": "skills/"
+}
