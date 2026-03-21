@@ -448,9 +448,10 @@ A single-page professional document that must be scannable in 6 seconds.
 
 ---
 
-## Flyers
+## Flyers (Detailed Design Guide)
 
-A single-page promotional piece that must grab attention from a distance and communicate essential info at a glance.
+Extends the "Event Posters & Flyers" section above with deeper layout patterns, color psychology, and typographic rules for standalone promotional flyers.
+
 
 ### Core Principles
 
@@ -681,9 +682,9 @@ A personal, often emotional piece that sets the tone for an event.
 
 ---
 
-## Email Newsletters
+## Email Newsletters (Full Layout Guide)
 
-A content-rich, scannable, single-column layout optimized for inbox reading.
+Extends the "Email Headers & Newsletter Graphics" section above — this covers full newsletter layout design, not just header/hero graphics.
 
 ### Core Principles
 
@@ -839,7 +840,7 @@ Professional business documents — structured, authoritative, and information-r
 | **Blog Hero** | 1200x675 | Atmospheric, optional text |
 | **OG Image** | 1200x630 | Title + brand, works at 300px |
 | **Certificate** | 1400x1000 | Formal, centered, generous whitespace |
-| **Business Card** | 672x384 | 2 colors max, 3-level hierarchy, front+back |
+| **Business Card** | 336x192 / 672x384 | 2 colors max, 3-level hierarchy, front+back |
 | **Resume** | 816x1056 | ONE page, scannable in 6 seconds, one accent |
 | **Flyer** | 816x1056 | Headline PUNCHES, WHAT+WHEN+WHERE+HOW |
 | **Menu** | 816x1056 | Scannable categories, prices visible, appetizing |
