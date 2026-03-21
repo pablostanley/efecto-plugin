@@ -2,7 +2,7 @@
 
 Design with AI agents using [Efecto](https://efecto.app) — a real-time visual design tool where humans and robots design together.
 
-Works with **Claude Code**, **Cursor**, and any MCP-compatible client.
+Works with **Claude Code**, **Cursor**, **Codex**, and any MCP-compatible client.
 
 ## What's Included
 
@@ -32,6 +32,20 @@ claude plugin add efecto
     }
   }
 }
+```
+
+### OpenAI Codex
+
+```bash
+codex mcp add efecto -- npx -y @efectoapp/mcp
+```
+
+Or add to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.efecto]
+command = "npx"
+args = ["-y", "@efectoapp/mcp"]
 ```
 
 ### Any MCP Client
