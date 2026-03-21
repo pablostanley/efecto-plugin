@@ -1,11 +1,11 @@
 ---
 name: graphic-design
-description: Design graphic assets — presentations, pitch decks, event posters, email headers, blog images, open graph cards, and print-style layouts with bold visual design.
+description: Design graphic assets — presentations, pitch decks, event posters, email headers, blog images, open graph cards, business cards, resumes, menus, infographics, invitations, newsletters, and documents with bold visual design.
 ---
 
 # Efecto — Graphic Design Guide
 
-Graphic design assets live between web pages and social media posts. They're self-contained visual pieces — a presentation slide, an event poster, a blog hero image, an email header. Each has its own constraints, but they share a common DNA: clear hierarchy, intentional composition, and designs that work at their intended viewing size.
+Graphic design assets live between web pages and social media posts. They're self-contained visual pieces — a presentation slide, an event poster, a business card, a restaurant menu, an infographic, an invitation. Each has its own constraints, but they share a common DNA: clear hierarchy, intentional composition, and designs that work at their intended viewing size.
 
 ---
 
@@ -38,7 +38,7 @@ The common thread: **less is more.** Every element must earn its place.
 1. **One idea per slide.** If you need bullet points, each bullet should be its own slide.
 2. **30pt rule.** At 1920px width, nothing smaller than `text-3xl` (`30px`). If projected, even `text-4xl` is the minimum.
 3. **6 words per line, 6 lines max.** Less is better. If you have a paragraph, you have a document, not a slide.
-4. **Full-bleed visuals.** When using an image, let it fill the entire slide. Overlay text on a dark gradient or solid block.
+4. **Full-bleed visuals.** When using an image, let it fill the entire slide. Overlay text on a solid dark block (not a gradient — use solid colors).
 5. **Consistent grid.** Pick a layout system and stick with it across all slides. Title always in the same position.
 6. **Slide numbers.** Subtle but present — helps navigation during Q&A.
 
@@ -336,6 +336,476 @@ OG images appear when someone shares a URL. They render at different sizes depen
 
 ---
 
+## Business Cards
+
+The most constrained and craft-dependent format in graphic design. Every pixel matters.
+
+### Core Principles
+
+- **Restraint is everything.** A business card has ~30 cm² to work with. Every element must earn its place.
+- **Hierarchy through scale contrast.** Name LARGE, title medium, contact details small. Three levels, max.
+- **Whitespace is luxury.** The most memorable cards are the ones with the most breathing room. Resist filling space.
+- **One signature element.** A bold color block, an oversized initial, a geometric accent — pick ONE.
+
+### Artboard Setup
+
+- Standard: 336x192 (3.5" x 2" at 96 DPI) or 672x384 for higher fidelity
+- Two artboards for front/back: "Front" and "Back"
+- Front: name + title + brand. Back: contact details + address.
+- Position side-by-side: x=0 for front, x=width+60 for back
+
+### Front Layout Patterns
+
+- **Classic**: Logo top-left, name center or left-aligned, title below name. Clean, professional.
+- **Bold**: Name in text-3xl or text-4xl spanning most of the card. Title in text-xs uppercase tracking-widest.
+- **Minimal**: Just the name, centered, with generous margins. Nothing else on front.
+- **Asymmetric**: Name left-aligned, large color block or accent shape on right third.
+- **Branded**: Full-bleed brand color with reversed (white) text.
+
+### Back Layout Patterns
+
+- **Info stack**: Left-aligned column: phone, email, website, address. Small icons optional.
+- **Two-column**: Contact left, address right.
+- **Centered**: All info centered, separated by subtle dividers or spacing.
+
+### Typography
+
+- Name: text-xl to text-3xl, font-bold or font-extrabold. This is the HERO of the card.
+- Title/role: text-xs to text-sm, font-medium, text-muted-foreground. Quiet, subordinate.
+- Contact: text-xs, font-normal. Legible but small. Use tracking-wide for all-caps labels.
+- NEVER use more than 2 font weights on a business card. Bold + normal. That's it.
+
+### Color Rules
+
+- TWO colors max (plus black/white). Brand color + neutral.
+- Full-bleed color backgrounds make cards stand out physically.
+- Dark cards (bg-zinc-950, bg-slate-900) feel premium.
+
+### Rules
+
+- NO paragraphs. No sentences. Just name, title, contact data.
+- NO decorative borders around the entire card — they feel dated.
+- ALWAYS include: name, title/role, at least email and phone.
+- Horizontal orientation is standard. Vertical is bold and distinctive — suggest it for creative professionals.
+
+---
+
+## Resumes / CVs
+
+A single-page professional document that must be scannable in 6 seconds.
+
+### Core Principles
+
+- **Scannable in seconds.** Recruiters spend 6-10 seconds per resume. Visual hierarchy is critical.
+- **Information-dense but organized.** Resumes pack a lot of content. The design's job is to make density feel clear, not cluttered.
+- **Conservative elegance.** Bold design choices should be subtle — a strong color accent, a distinctive layout — not experimental.
+- **Content is king.** The text matters more than the styling. Never sacrifice information space for visual decoration.
+
+### Artboard Setup
+
+- US Letter: 816x1056 (8.5" x 11" at 96 DPI)
+- A4: 794x1123 (210mm x 297mm at 96 DPI)
+- Single artboard — resumes should be ONE page.
+
+### Layout Patterns
+
+- **Two-column (most popular)**: Narrow sidebar (w-1/3) for contact, skills, education + wide main column (w-2/3) for experience, projects.
+- **Single-column**: Full-width, traditional. Header -> Summary -> Experience -> Education -> Skills. Classic and ATS-friendly.
+- **Top header + single column**: Bold header band with name + contact, then single-column content below.
+- **Asymmetric**: Sidebar with accent color background for visual distinction.
+
+### Section Hierarchy
+
+1. **Name + contact** — text-2xl to text-3xl font-bold, followed by email, phone, location, LinkedIn in text-xs
+2. **Experience** — company + role + dates, with 2-3 bullet achievements each
+3. **Education** — degree, school, year
+4. **Skills** — grouped by category (Languages, Frameworks, Tools)
+5. Optional: Summary (2 lines max), Projects, Certifications
+
+### Typography
+
+- Name: text-2xl to text-3xl, font-bold. The only large text on the page.
+- Section headers: text-sm uppercase tracking-widest font-bold — acts as visual anchors
+- Company/role: text-sm font-semibold for company, font-medium for role
+- Body/bullets: text-xs to text-sm, font-normal. Compact but readable.
+- Dates: text-xs, text-muted-foreground, right-aligned or inline
+
+### Color Strategy
+
+- ONE accent color for section headers, sidebar, or name. Subtle — not a rainbow.
+- Dark: slate-900 or zinc-900 for body text. Never pure black.
+- Accent choices: blue-700 (professional), emerald-700 (creative), slate-700 (conservative), amber-700 (warm)
+- Sidebar background: muted accent like slate-50, blue-50, or a subtle tint
+
+### Rules
+
+- ONE page. No exceptions unless explicitly asked for multi-page CV.
+- NO photos unless explicitly asked (photos on resumes are culturally variable).
+- NO icons for contact info — they waste space. Just text.
+- NO decorative elements. Every pixel should convey information.
+- USE consistent date formatting: "Jan 2023 - Present" or "2023 - Present"
+- USE real-sounding content, not "Lorem ipsum." Realistic job titles, companies, and bullet points.
+
+---
+
+## Flyers
+
+A single-page promotional piece that must grab attention from a distance and communicate essential info at a glance.
+
+### Core Principles
+
+- **Impact from 3 feet away.** Flyers compete for attention on bulletin boards, in stacks, on screens. The headline must PUNCH.
+- **Essential info only.** WHAT + WHEN + WHERE + HOW (to attend/buy/register). Everything else is noise.
+- **Bold visual hierarchy.** Three tiers: (1) Headline/event name — massive, (2) Key details — medium, (3) Fine print — small.
+- **Energetic composition.** Flyers should feel dynamic — angled text, color blocks, overlapping elements, strong contrast.
+
+### Artboard Setup
+
+- Standard flyer: 816x1056 (US Letter) or 794x1123 (A4)
+- Half-page: 816x528 or compact 540x720
+- Social/digital flyer: 1080x1080 (square) or 1080x1350 (4:5)
+
+### Layout Patterns
+
+- **Stacked bold**: Giant headline top, image/graphic middle, details bottom. Reads top-to-bottom.
+- **Full-bleed image + overlay**: Photo fills the card, semi-transparent overlay for text readability. Dramatic.
+- **Split composition**: Color block top (headline) + white/dark bottom (details). Clean separation.
+- **Diagonal energy**: Angled divider between image and text zones. Feels active and dynamic.
+- **Centered stack**: Everything centered, stacked vertically. Works for elegant/minimal events.
+- **Typographic**: No image — pure type. Giant headline, details in contrasting weight/size. Bold and editorial.
+
+### Typography
+
+- Headline: text-5xl to text-9xl, font-extrabold or font-black, tracking-tight. ALL CAPS is encouraged.
+- Date: text-xl to text-2xl, font-bold. Consider uppercase tracking-widest for emphasis.
+- Details: text-sm to text-base, font-normal. Quiet but readable.
+- MAX 2 text sizes for details (date + location should be similar). Headline is the outlier.
+
+### Color Psychology for Events
+
+- **Concert/party**: Neon on black (emerald-400, fuchsia-500, cyan-400 on zinc-950). High energy.
+- **Conference/professional**: Dark blue or slate on white. Clean authority.
+- **Community/cultural**: Warm tones (amber, orange, rose) on cream or dark backgrounds.
+- **Sale/promotion**: Red + yellow/white. Urgency colors. bg-red-600 text-white.
+- **Art/gallery**: Monochromatic or black + one accent. Minimalist sophistication.
+
+### Rules
+
+- NO tiny text. If the date isn't readable at arm's length, it's too small.
+- NO walls of text. A flyer is NOT a brochure. Max 3-4 short text blocks.
+- ALWAYS include date, time, location, and how to attend. Missing info = useless flyer.
+- CONTRAST is mandatory. Text must be instantly readable over any background.
+
+---
+
+## Restaurant / Cafe Menus
+
+A functional document that must be beautiful, scannable, and make food sound irresistible.
+
+### Core Principles
+
+- **Scannability first.** Customers scan menus in an F-pattern or Z-pattern. Category headers must be instantly visible.
+- **Make food the hero.** The item names and descriptions should dominate — not the decoration.
+- **Price alignment.** Prices must be easy to find but not dominant. Right-aligned, consistent formatting.
+- **Atmosphere through design.** The menu IS the restaurant's brand. Its style should match the dining experience.
+
+### Artboard Setup
+
+- Single page menu: 816x1056 (letter) or 794x1123 (A4)
+- Folded menu (each panel): 408x528 or similar half-page
+- Compact/table tent: 540x720 or 480x640
+- For multi-page: create multiple artboards side-by-side
+
+### Layout Patterns
+
+- **Single column**: Category by category, top to bottom. Best for short menus (< 20 items).
+- **Two column**: Left column + right column. Maximizes items per page. Use for larger menus.
+- **Centered elegant**: Everything centered, generous spacing. Perfect for fine dining with fewer items.
+- **Grid cards**: Items in card-style blocks with image placeholders. Modern, casual restaurants.
+- **Asymmetric**: One wide feature column + one narrow specials/drinks column.
+
+### Section Structure
+
+```
+STARTERS          <- Category header: text-lg to text-xl, font-bold, uppercase tracking-widest
+
+Bruschetta ............... $12    <- Item name: text-sm font-semibold, price right-aligned
+  Tomato, basil, balsamic         <- Description: text-xs text-muted-foreground
+
+Burrata Salad ............ $16
+  Heirloom tomato, arugula, olive oil
+```
+
+### Typography
+
+- Restaurant name: text-3xl to text-5xl, distinctive. This sets the tone.
+- Category headers: text-lg to text-xl, font-bold, uppercase, tracking-wide. Clear dividers.
+- Item names: text-sm to text-base, font-semibold. The star of each line.
+- Descriptions: text-xs to text-sm, font-normal, text-muted-foreground. Appetizing but compact.
+- Prices: text-sm, font-medium, right-aligned or after dot leaders.
+
+### Style by Restaurant Type
+
+- **Fine dining**: Minimal, serif-feeling (use font-light + tracking-wide). Lots of whitespace. Dark bg or ivory.
+- **Casual/bistro**: Warm tones, slightly playful. Rounded corners on sections. bg-amber-50 or bg-stone-50.
+- **Modern/trendy**: Clean sans-serif, dark theme (bg-zinc-950), accent color for specials. Minimal ornament.
+- **Cafe**: Light, airy. bg-white or bg-stone-50. Small illustrations encouraged.
+- **Bar/cocktail**: Dark and moody. bg-zinc-950 or bg-slate-900. Gold or amber accents. Atmospheric.
+
+### Rules
+
+- NO prices hidden or hard to find. Price transparency builds trust.
+- NO more than 7-9 items per category. Too many choices paralyze diners.
+- ALWAYS include: restaurant name, categories, item names, descriptions, prices.
+- USE appetizing language: "house-made", "slow-roasted", "seasonal", "fresh" — not "good" or "tasty."
+- Dietary markers (V, VG, GF) should be subtle: text-xs, after the item name, muted color.
+
+---
+
+## Infographics / Data Visualization
+
+A visual narrative that makes data compelling, memorable, and shareable.
+
+### Core Principles
+
+- **Story first, data second.** An infographic tells a story. The data supports it. Lead with the narrative arc, not the raw numbers.
+- **One key insight.** Every infographic should have ONE takeaway the viewer remembers. Everything else supports that insight.
+- **Visual encoding.** Numbers become shapes, sizes, colors, positions. Never just text + numbers — translate data into visual patterns.
+- **Top-to-bottom flow.** Infographics read like a scroll. Clear sections with clear transitions.
+
+### Artboard Setup
+
+- Standard: 800x2400 to 1080x3200 (tall, scrollable)
+- Social-friendly: 1080x1920 (9:16) or 1080x1350 (4:5)
+- Presentation: 1920x1080 (landscape, one key chart)
+- Use one tall artboard, NOT multiple. Infographics are single continuous pieces.
+
+### Section Flow
+
+1. **Title banner** — Bold headline that frames the story. "The State of...", "How X Changed Y", "By the Numbers: Z"
+2. **Key stat** — One massive number (text-7xl to text-9xl) that hooks attention. "73% of..." or "$4.2 Trillion"
+3. **Context section** — 2-3 sentences explaining why this matters. text-base, max-w-xl.
+4. **Data sections** (2-4) — Each visualizing one aspect of the data. Different visual encoding per section.
+5. **Comparison** — Side-by-side or before/after. Shows contrast clearly.
+6. **Conclusion/CTA** — Key takeaway restated, source credits.
+
+### Data Visualization Patterns (Using Efecto Nodes)
+
+Since Efecto doesn't have native chart components, represent data visually with layout:
+
+- **Bar chart**: Horizontal frames with width proportional to value. Label left, bar right.
+- **Stat cards**: Large number (text-6xl font-bold) + label (text-xs uppercase). Grid of 3-4.
+- **Comparison columns**: Two columns side-by-side, each with stacked items. Color-coded.
+- **Timeline**: Vertical line (w-0.5 bg-border) with alternating left/right content nodes.
+- **Icon array**: Grid of small icons (w-4 h-4) where colored vs muted represent proportions.
+- **Ranked list**: Numbered items with bars showing magnitude. 1-5 items.
+
+### Typography
+
+- Title: text-3xl to text-5xl, font-extrabold, tracking-tight. Sets the topic.
+- Key stat: text-7xl to text-9xl, font-black. The eye-catcher.
+- Section headers: text-xl font-bold. Separates data sections.
+- Labels: text-xs uppercase tracking-widest font-medium. Data annotations.
+- Body text: text-sm, max 2-3 lines per section. Support, not bulk.
+- Source: text-xs text-muted-foreground, bottom of infographic.
+
+### Color Strategy
+
+- **One primary data color** + neutral: blue-600 bars on white, emerald-500 bars on slate-50.
+- **Sequential**: Light to dark shades of one color for ranked data (blue-200 → blue-800).
+- **Diverging**: Two colors for comparison (emerald-500 vs rose-500, "good" vs "bad").
+- **Categorical**: 3-4 distinct colors for different categories (blue, amber, emerald, rose).
+- Background: Very subtle tint (slate-50, stone-50, zinc-50) or white. Never dark for full infographic.
+
+### Rules
+
+- NO more than 4 data sections. After 4, attention drops sharply.
+- NO raw data tables. Translate EVERY number into a visual element.
+- ALWAYS cite sources (text-xs at bottom). Even "Source: Company Annual Report 2025" adds credibility.
+- USE real-sounding data. "73% of remote workers prefer async communication" — not "X% of people do Y."
+- NEVER crowd sections. Gap-8 to gap-12 between data blocks. Let each section breathe.
+
+---
+
+## Invitations / Announcement Cards
+
+A personal, often emotional piece that sets the tone for an event.
+
+### Core Principles
+
+- **Emotion first.** Invitations carry feeling — celebration, elegance, excitement, warmth. The design must evoke the event's spirit.
+- **Essential details, beautifully arranged.** WHO is hosting, WHAT the event is, WHEN, WHERE, and HOW to respond. Presented with grace.
+- **Memorability.** One unexpected element — an oversized letter, a striking color, an elegant border — makes it stick.
+- **Consistency with the event.** A black-tie gala invitation looks nothing like a kid's birthday party invite. Match the formality level exactly.
+
+### Artboard Setup
+
+- Standard card: 672x480 (7" x 5") or 480x672 (5" x 7" portrait)
+- Square: 540x540 or 648x648
+- A5 landscape: 794x559
+- Create TWO artboards: "Front" and "Back" (or "Details") for complete invitations
+
+### Layout Patterns
+
+- **Centered classic**: Everything centered, generous margins. Name/event large, details smaller below. Timeless.
+- **Frame/border**: Thin decorative border (border-2 rounded-xl with p-8 to p-12 inner padding). Content centered within.
+- **Split**: Left half is a color block or image, right half is text. Modern and structured.
+- **Top-heavy**: Large decorative header (color block, pattern, or image) with details in lower third.
+- **Minimal**: Just text on a rich background color. Extreme restraint. Works for formal events.
+
+### Content Hierarchy
+
+1. **Host line** (optional) — "Together with their families" or "You're invited to" — text-xs to text-sm, font-light
+2. **Event/name** — THE centerpiece. "Sarah & James", "Annual Gala", "You're Turning 5!" — text-3xl to text-5xl
+3. **Event type** — "Wedding Celebration", "Birthday Party", "Grand Opening" — text-sm to text-base
+4. **Date + time** — Prominent. text-lg font-semibold. Consider ornamental formatting.
+5. **Venue** — Name + address. text-sm to text-base.
+6. **RSVP** — How to respond. text-xs to text-sm. "RSVP by March 15 to sarah@email.com"
+7. **Additional info** — Dress code, parking, dietary notes. text-xs text-muted-foreground.
+
+### Style by Event Type
+
+- **Wedding**: Elegant, serif-feeling. Soft colors (rose-50, stone-50, amber-50). Tracking-wide for names. Minimal ornament.
+- **Birthday (adult)**: Can be bold or elegant. Dark backgrounds (zinc-900 + gold accent) or bright (fuchsia, amber).
+- **Birthday (kids)**: Bright, playful. Bold colors (yellow-400, sky-400, rose-400). Large, fun text. Rounded everything.
+- **Corporate**: Clean, professional. Brand colors + white. Clear hierarchy. No playfulness.
+- **Holiday**: Themed colors (red+green for Christmas, orange+black for Halloween). Warm and festive.
+- **Baby shower**: Soft pastels (sky-100, rose-100, mint). Gentle, delicate. Lots of whitespace.
+
+### Rules
+
+- NO clutter. An invitation should feel spacious and intentional. When in doubt, remove elements.
+- NO lorem ipsum. Use realistic names ("Emma & Lucas"), real dates, real venues.
+- ALWAYS include: event name, date, time, location, RSVP method.
+- For weddings: names of the couple are THE design, not a detail. Make them magnificent.
+
+---
+
+## Email Newsletters
+
+A content-rich, scannable, single-column layout optimized for inbox reading.
+
+### Core Principles
+
+- **Single column is king.** Email clients are unpredictable. Single column (max-w-xl to max-w-2xl) works everywhere.
+- **Scannable blocks.** Readers skim newsletters. Each content block should be self-contained: image/headline/excerpt/link.
+- **Clear visual rhythm.** Consistent spacing between sections. Repeating patterns readers can predict.
+- **One CTA per section.** Each content block should have exactly one action — "Read more", "Watch", "Register."
+
+### Artboard Setup
+
+- Standard: 600x900 to 640x1200 (email width is typically 600px)
+- Use 640 width as max — email clients clip wider layouts
+- Single artboard, tall. Newsletter scrolls vertically.
+
+### Layout Patterns
+
+- **Header → Hero → Cards → CTA → Footer**: Most common newsletter structure.
+- **Blog digest**: Repeating cards (image left, text right, or stacked) for 3-5 articles.
+- **Single story**: One large featured article with supporting images and pull quotes.
+- **Curated links**: Numbered list of links with brief descriptions. Minimal imagery.
+- **Mixed**: Feature story + quick links + event promo + footer.
+
+### Section Structure
+
+```
+HEADER — Logo left, date/issue right. bg-background, py-4 px-6. Thin bottom border.
+
+HERO — Featured story. Large image (rounded-xl), headline below (text-xl font-bold),
+  2-line excerpt, "Read more" link.
+
+CONTENT CARDS (x3-5) — Repeating pattern:
+  Image thumbnail (w-24 h-24 rounded-lg) left + headline (text-base font-semibold)
+  + excerpt (text-sm) + link
+
+DIVIDER — Simple horizontal rule (h-px bg-border) between sections.
+
+CTA SECTION — "Subscribe", "Share", or event promo. bg-muted rounded-xl p-6, centered.
+
+FOOTER — Unsubscribe link, company address, social icons. text-xs text-muted-foreground.
+```
+
+### Typography
+
+- Header: Logo text or image. text-lg font-bold.
+- Headlines: text-lg to text-xl, font-bold. Clickable-feeling.
+- Body/excerpts: text-sm, font-normal. 2-3 lines max per card.
+- Links: text-sm font-medium text-primary. Underlined or obvious color change.
+- Section labels: text-xs uppercase tracking-widest font-semibold text-muted-foreground.
+- Footer: text-xs, text-muted-foreground.
+
+### Rules
+
+- MAX width 640px. Never wider.
+- NO complex layouts. Two columns MAX, and prefer single column.
+- ALWAYS include: header with branding, content sections, unsubscribe link, footer.
+- EVERY content card needs a clear action link. Don't make readers guess where to click.
+
+---
+
+## Business Documents / Reports
+
+Professional business documents — structured, authoritative, and information-rich.
+
+### Core Principles
+
+- **Credibility through structure.** A well-organized document builds trust before the reader processes content.
+- **Dense but navigable.** Business documents carry substantial text. The design's job is wayfinding.
+- **Professional restraint.** No flashy design. Clean typography, consistent spacing, subtle accents.
+- **Hierarchy is everything.** Title → Section → Subsection → Body → Caption. Five distinct visual levels.
+
+### Artboard Setup
+
+- US Letter: 816x1056
+- A4: 794x1123
+- For multi-page documents: multiple artboards, same dimensions, positioned vertically
+- Name pages: "01 — Cover", "02 — Executive Summary", "03 — Analysis"
+
+### Document Types
+
+**Report / White Paper:**
+- Cover page: Title (text-4xl font-bold), subtitle, author, date, company logo
+- TOC (optional): Section numbers + titles + page refs
+- Sections: Large headers (text-2xl font-bold) + body text (text-sm) + call-out boxes
+
+**Proposal:**
+- Cover: Project name + client name + date. Professional and tailored.
+- Problem → Solution → Approach → Timeline → Pricing → Terms
+
+**Brochure:**
+- Two or three column layout
+- Feature boxes: bg-muted rounded-xl p-6 with icon + heading + description
+- Back page: contact info, location, website
+
+**One-pager / Fact Sheet:**
+- Everything on ONE page. Maximum information density.
+- Header band with title + logo, 2-3 column body with stat boxes
+
+### Typography
+
+- Document title: text-3xl to text-4xl, font-bold. Cover page hero.
+- Section headers: text-xl to text-2xl, font-bold. Clear section breaks.
+- Subsection headers: text-base to text-lg, font-semibold.
+- Body text: text-sm, font-normal, leading-relaxed. Readable paragraphs.
+- Captions: text-xs, text-muted-foreground, italic. Under figures/tables.
+
+### Structure Elements
+
+- **Pull quote**: bg-muted p-6 rounded-xl, text-lg font-medium, border-l-4 border-primary
+- **Stat box**: bg-primary text-primary-foreground p-4 rounded-xl, large number + label
+- **Table**: Full-width, header row bg-muted, alternating row stripes, text-xs to text-sm
+- **Dividers**: h-px bg-border between major sections
+
+### Rules
+
+- BODY TEXT must be text-sm with leading-relaxed. Tight leading is exhausting.
+- MAX 2 columns for body text. Single column is safest for long-form reading.
+- ALWAYS include: title, date, author/company, section headers, page structure.
+- FIGURES and TABLES get captions: "Figure 1: Monthly active users, Jan-Dec 2025"
+- NO decorative elements. Every visual element should convey information or improve navigation.
+
+---
+
 ## General Graphic Design Tips
 
 ### Composition
@@ -369,3 +839,11 @@ OG images appear when someone shares a URL. They render at different sizes depen
 | **Blog Hero** | 1200x675 | Atmospheric, optional text |
 | **OG Image** | 1200x630 | Title + brand, works at 300px |
 | **Certificate** | 1400x1000 | Formal, centered, generous whitespace |
+| **Business Card** | 672x384 | 2 colors max, 3-level hierarchy, front+back |
+| **Resume** | 816x1056 | ONE page, scannable in 6 seconds, one accent |
+| **Flyer** | 816x1056 | Headline PUNCHES, WHAT+WHEN+WHERE+HOW |
+| **Menu** | 816x1056 | Scannable categories, prices visible, appetizing |
+| **Infographic** | 1080x3200 | One key insight, visual data encoding, top-to-bottom |
+| **Invitation** | 672x480 | Emotion first, match formality level exactly |
+| **Newsletter** | 640x1200 | Single column, max 640px, scannable blocks |
+| **Document** | 816x1056 | 5-level hierarchy, professional restraint |
