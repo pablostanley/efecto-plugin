@@ -21,7 +21,7 @@ claude plugin add efecto
 
 ### Cursor
 
-Install from the [Cursor Marketplace](https://cursor.com/marketplace), or add manually to `.cursor/mcp.json`:
+[Install with one click](cursor://anysphere.cursor-deeplink/mcp/install?name=efecto&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBlZmVjdG9hcHAvbWNwIl19) (opens Cursor automatically), or add manually to `.cursor/mcp.json`:
 
 ```json
 {
