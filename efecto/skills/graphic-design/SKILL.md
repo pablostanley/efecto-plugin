@@ -50,7 +50,7 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-Once installed, you'll have access to 46 design tools. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
+Once installed, you'll have access to 46 design tools plus a standalone image search tool. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
 
 ### How It Works
 
@@ -135,6 +135,84 @@ Icons: `<svg icon="arrow-right" className="w-5 h-5 text-gray-600" />`
 - **Use `grow` instead of `flex-1`** — `flex-1` doesn't work in Efecto
 - **Buttons ignore children** — use a flex container with `<span>` + `<svg>` instead
 - **Always add `w-full`** on direct children of artboards
+
+---
+
+## Images — Use Real Photos, Not Placeholders
+
+Use `search_images` to find free, high-quality stock photos from Lummi. **No session required** — call it anytime.
+
+```
+search_images
+  query: "conference stage audience"
+  orientation: "horizontal"
+  luminance: "dark"
+  limit: 4
+```
+
+Then apply images to your designs:
+
+- **Image node**: `add_node` with `type: "image"`, `src: "<url>"`, `alt: "..."`, `className: "w-full h-[400px] object-cover rounded-2xl"`
+- **Background fill**: `set_fill` with `fill: { type: "image", url: "<url>", size: "cover" }`
+- **In JSX**: `<img src="<url>" alt="..." className="w-full h-[400px] object-cover rounded-2xl" />`
+
+**Tips for graphic design**: Match `orientation` to your artboard (vertical for posters/stories, horizontal for banners/presentations, square for social cards). Use `luminance: "dark"` for dark-themed designs. Search before designing — build layouts around real images, not empty gray boxes.
+
+---
+
+## Shader Nodes & Visual Effects
+
+Add visual effects to graphic designs with shader nodes. Use `add_node` with `type: "shader"`.
+
+### Generative Backgrounds
+
+Create eye-catching backgrounds without images:
+
+```
+add_node
+  parentId: "<artboard-id>"
+  type: "shader"
+  shaderType: "meshGradient"
+  className: "w-full h-full"
+```
+
+**Shader types**: `meshGradient` (organic blending), `dotGrid` (tech/data), `voronoi` (organic cells), `liquidMetal` (premium), `chrome` (reflective), `pulsar` (energy), `blackHole` (dramatic), `glass` (frosted), `spiral` (playful), `particles` (atmospheric), `fireworks` (celebration).
+
+### Apply Effects to Images
+
+Process photos with ASCII, dither, halftone, glitch, or art effects:
+
+```
+search_images  query: "portrait"  orientation: "vertical"  limit: 1
+add_node
+  parentId: "<artboard-id>"
+  type: "shader"
+  inputType: "image"
+  mediaInput: { mediaUrl: "<url>", mediaType: "image", objectFit: "cover" }
+  effectId: "halftone-mono"
+  effectEnabled: true
+  className: "w-full h-full"
+```
+
+**Effect categories**: ASCII (`ascii-standard`, `ascii-dense`, `ascii-minimal`, `ascii-blocks`), Dither (`dither-floyd-steinberg`, `dither-atkinson`), Halftone (`halftone-mono`, `halftone-cmyk`), Glitch (`glitch-vhs`, `glitch-digital`), Art (`art-kuwahara`, `art-crosshatch`, `art-lineart`, `art-engraving`, `art-stipple`).
+
+### Post-Processes
+
+Stack additional effects: `grain`, `vignette`, `bloom`, `scanlines`, `noise`, `pixelate`, `sepia`, `color-tint`.
+
+```
+add_node
+  parentId: "<id>"
+  type: "shader"
+  shaderType: "meshGradient"
+  postProcesses: [
+    { type: "grain", enabled: true, settings: { intensity: 0.3 } },
+    { type: "vignette", enabled: true, settings: { intensity: 0.5 } }
+  ]
+  className: "w-full h-full"
+```
+
+**Best for**: Presentation backgrounds, poster visuals, event graphics, blog hero images, OG cards with distinctive visual treatments.
 
 ---
 

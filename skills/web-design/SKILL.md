@@ -50,7 +50,7 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-Once installed, you'll have access to 46 design tools. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
+Once installed, you'll have access to 46 design tools plus a standalone image search tool. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
 
 ---
 
@@ -235,6 +235,203 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 | `audit_design` | Audits design against professional quality rules: typography (scale, weight contrast, sizing), color (neutral consistency, pure black, low-contrast combos), spacing (4pt grid, touch targets), and AI slop detection (monotonous layouts). Pass `artboardId` for one artboard or omit for all. |
 | `repair_design` | Applies safe, deterministic fixes across the document (or one artboard) in one pass: missing w-full, missing flex, arbitrary Tailwind values → inline styles, pure black → zinc-950, touch-target bumps, placeholder images, empty text defaults. Pass `dryRun: true` to preview. |
 
+### Image Search
+
+| Tool | Purpose |
+|------|---------|
+| `search_images` | Search for free stock images (Lummi). No session required. Returns URLs to use with `add_node` or `set_fill`. |
+
+---
+
+## Images — Search and Use Real Photos
+
+Efecto includes a built-in image search powered by Lummi — a library of free, high-quality stock photos, illustrations, and 3D renders. **Use this instead of placeholder images** to make designs look polished and real.
+
+### The `search_images` Tool
+
+This tool works **without a session** — call it anytime, even before creating a session.
+
+```
+search_images
+  query: "mountain landscape"
+  orientation: "horizontal"
+  limit: 4
+```
+
+Returns a list of images with `url`, `thumbnail`, `alt`, `width`, `height`, `photographer`, and `orientation`.
+
+### Filters
+
+| Filter | Values | When to Use |
+|--------|--------|-------------|
+| `query` | Any search term | Always — describe what you need ("team working", "abstract gradient", "coffee shop") |
+| `orientation` | `horizontal`, `vertical`, `square` | Match the layout: horizontal for hero banners, vertical for mobile/stories, square for cards |
+| `type` | `photo`, `illustration`, `3d` | Default returns all. Use "photo" for realistic imagery, "illustration" for stylized graphics |
+| `luminance` | `dark`, `neutral`, `bright` | Match the design mood: "dark" for dark-themed pages, "bright" for light/airy designs |
+| `limit` | 1–20 (default: 6) | Keep low (3–6) to avoid overwhelming context |
+
+### Workflow: Search → Apply
+
+**Step 1: Search for images**
+```
+search_images
+  query: "modern office workspace"
+  orientation: "horizontal"
+  luminance: "bright"
+  limit: 3
+```
+
+**Step 2a: Add as an image node**
+```
+add_node
+  parentId: "<section-id>"
+  type: "image"
+  src: "<url-from-search>"
+  alt: "Modern office workspace"
+  className: "w-full h-[400px] rounded-2xl object-cover"
+```
+
+**Step 2b: Set as background fill**
+```
+set_fill
+  targetId: "<section-id>"
+  fill: { type: "image", url: "<url-from-search>", size: "cover", position: "center" }
+```
+
+**Step 2c: Use in JSX (add_section)**
+```
+add_section
+  parentId: "<artboard-id>"
+  jsx: '<section className="flex items-center gap-16 px-16 py-24 w-full">
+    <div className="flex flex-col gap-6 grow">
+      <h1 className="text-5xl font-bold text-gray-900">Our Story</h1>
+      <p className="text-lg text-gray-500">Building the future of design.</p>
+    </div>
+    <img src="<url-from-search>" alt="Team at work" className="w-[560px] h-[380px] rounded-2xl object-cover" />
+  </section>'
+```
+
+### Tips
+
+- **Search before designing.** Find images first, then build the layout around them. This produces better compositions than adding images as afterthoughts.
+- **Match orientation to layout.** Horizontal images for hero sections, vertical for sidebar/mobile, square for grid cards.
+- **Use luminance filter.** For dark-themed designs, search `luminance: "dark"` to get images that blend naturally with dark backgrounds.
+- **Set `object-cover`** on image nodes so they fill their container without distortion.
+- **Prefer real images over placeholders.** Instead of `<div className="w-full h-[400px] bg-gray-100 rounded-2xl" />`, search for a relevant image and use it.
+
+---
+
+## Shader Nodes & Visual Effects
+
+Shader nodes are a powerful node type that combines **generative visuals**, **image/video processing**, and **visual effects** (ASCII, dither, halftone, glitch, art filters). They render via WebGL and can be placed anywhere in the design like any other node.
+
+### Creating a Shader Node
+
+Use `add_node` with `type: "shader"`:
+
+```
+add_node
+  parentId: "<artboard-id>"
+  type: "shader"
+  shaderType: "meshGradient"
+  className: "w-full h-[400px] rounded-2xl"
+```
+
+### Input Sources
+
+| Input Type | Description | Key Properties |
+|-----------|-------------|----------------|
+| `shader` (default) | Generative WebGL visuals | `shaderType`, `shaderSettings` |
+| `image` | Process an image through effects | `mediaInput: { mediaUrl, mediaType: "image", objectFit }` |
+| `video` | Process a video through effects | `mediaInput: { mediaUrl, mediaType: "video" }` |
+| `fill` | Solid color through effects | `fillColor: "#hex"` |
+
+### Generative Shader Types (11)
+
+| Shader | Description | Best For |
+|--------|-------------|----------|
+| `meshGradient` | Smooth organic color blending | Hero backgrounds, ambient visuals |
+| `dotGrid` | Animated dot grid pattern | Tech/data aesthetics |
+| `voronoi` | Cell-based organic pattern | Abstract textures |
+| `liquidMetal` | Metallic fluid simulation | Premium/luxury visuals |
+| `chrome` | Chrome reflection effect | Bold, reflective accents |
+| `pulsar` | Radial pulsing energy | Dynamic, attention-grabbing |
+| `blackHole` | Gravitational distortion | Dramatic dark visuals |
+| `glass` | Frosted glass refraction | Subtle, elegant overlays |
+| `spiral` | Spiraling motion pattern | Hypnotic, playful |
+| `particles` | Floating particle system | Ambient, atmospheric |
+| `fireworks` | Exploding particle bursts | Celebration, energy |
+
+### Visual Effects (28)
+
+Apply effects on top of any input source. Set `effectId` and `effectEnabled: true`:
+
+```
+add_node
+  parentId: "<section-id>"
+  type: "shader"
+  inputType: "image"
+  mediaInput: { mediaUrl: "<image-url>", mediaType: "image", objectFit: "cover" }
+  effectId: "ascii-standard"
+  effectEnabled: true
+  className: "w-full h-[500px] rounded-2xl"
+```
+
+| Category | Effect IDs | Description |
+|----------|-----------|-------------|
+| **ASCII** | `ascii-standard`, `ascii-dense`, `ascii-minimal`, `ascii-blocks`, `ascii-braille`, `ascii-technical`, `ascii-matrix`, `ascii-hatching` | Convert visuals to ASCII character art |
+| **Dither** | `dither-floyd-steinberg`, `dither-atkinson`, `dither-stucki`, `dither-sierra`, `dither-sierra-lite`, `dither-burkes`, `dither-jarvis-judice-ninke`, `dither-two-row-sierra`, `color-separation` | Retro dithering patterns |
+| **Halftone** | `halftone-mono`, `halftone-cmyk` | Print-style dot patterns (mono or CMYK) |
+| **Glitch** | `glitch-vhs`, `glitch-digital`, `glitch-weird`, `glitch-chromatic` | Digital corruption and distortion |
+| **Art** | `art-kuwahara`, `art-crosshatch`, `art-lineart`, `art-engraving`, `art-stipple` | Painterly and sketch-style filters |
+
+### Post-Process Stack
+
+Layer additional effects with `postProcesses`: `scanlines`, `vignette`, `bloom`, `grain`, `noise`, `pixelate`, `wave`, `rgb-glitch`, `brightness-contrast`, `color-tint`, `sepia`, `grid`, `dot-screen`, `light-beams`, `warp`, `motion-blur`, `chromatic-aberration`, `curvature`.
+
+```
+postProcesses: [
+  { type: "grain", enabled: true, settings: { intensity: 0.3 } },
+  { type: "vignette", enabled: true, settings: { intensity: 0.5 } }
+]
+```
+
+### Common Recipes
+
+**ASCII art hero from an image:**
+```
+search_images  query: "city skyline"  orientation: "horizontal"  limit: 1
+add_node
+  parentId: "<artboard-id>"
+  type: "shader"
+  inputType: "image"
+  mediaInput: { mediaUrl: "<url>", mediaType: "image", objectFit: "cover" }
+  effectId: "ascii-standard"
+  effectEnabled: true
+  className: "w-full h-[500px]"
+```
+
+**Generative gradient background:**
+```
+add_node
+  parentId: "<artboard-id>"
+  type: "shader"
+  shaderType: "meshGradient"
+  className: "w-full h-[600px]"
+```
+
+**Halftone effect on a photo:**
+```
+add_node
+  parentId: "<section-id>"
+  type: "shader"
+  inputType: "image"
+  mediaInput: { mediaUrl: "<url>", mediaType: "image", objectFit: "cover" }
+  effectId: "halftone-mono"
+  effectEnabled: true
+  className: "w-[400px] h-[400px] rounded-2xl"
+```
+
 ---
 
 ## Node Types & HTML Tags
@@ -251,6 +448,7 @@ Every node maps 1:1 to an HTML element. The `type` determines behavior; the `tag
 | **icon** | `svg` | svg | `iconName` (kebab-case), `iconLibrary`, `iconWeight` |
 | **input** | `input` | input, textarea, select | `placeholder`, `inputType`, `label` |
 | **video** | `video` | video | `src`, `poster`, `autoPlay`, `loop`, `muted` |
+| **shader** | (WebGL) | — | `shaderType`, `inputType`, `effectId`, `effectEnabled`, `effectSettings`, `postProcesses` |
 | **component** | `div` | div | `componentId`, `overrides` |
 
 ### Tag Determines Type in JSX

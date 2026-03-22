@@ -50,7 +50,7 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-Once installed, you'll have access to 46 design tools. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
+Once installed, you'll have access to 46 design tools plus a standalone image search tool. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
 
 ### How It Works
 
@@ -137,6 +137,77 @@ Icons: `<svg icon="arrow-right" className="w-5 h-5 text-gray-600" />`
 - **Buttons ignore children** — use a flex container with `<span>` + `<svg>` instead
 - **Always add `w-full`** on direct children of artboards
 - **For carousels**: use `duplicate_artboard` to create slides, then `batch_update` to change content per slide
+
+---
+
+## Images — Use Real Photos, Not Placeholders
+
+Use `search_images` to find free, high-quality stock photos from Lummi. **No session required** — call it anytime.
+
+```
+search_images
+  query: "team celebration"
+  orientation: "square"
+  luminance: "bright"
+  limit: 4
+```
+
+Then apply images to your designs:
+
+- **Image node**: `add_node` with `type: "image"`, `src: "<url>"`, `alt: "..."`, `className: "w-full h-full object-cover"`
+- **Background fill**: `set_fill` with `fill: { type: "image", url: "<url>", size: "cover" }`
+- **In JSX**: `<img src="<url>" alt="..." className="w-full h-full object-cover" />`
+
+**Tips for social media**: Match `orientation` to the platform format — `square` for Instagram/LinkedIn posts, `vertical` for Stories/Reels/TikTok, `horizontal` for YouTube thumbnails/Twitter. Use `luminance: "dark"` for dramatic social content. Real photos make social media content feel authentic — avoid empty placeholder boxes.
+
+---
+
+## Shader Nodes & Visual Effects
+
+Make social media content stand out with shader nodes. Use `add_node` with `type: "shader"`.
+
+### Generative Backgrounds
+
+Eye-catching backgrounds without images — perfect for quote cards, carousels, and story slides:
+
+```
+add_node
+  parentId: "<artboard-id>"
+  type: "shader"
+  shaderType: "meshGradient"
+  className: "w-full h-full"
+```
+
+**Shader types**: `meshGradient` (organic), `liquidMetal` (premium), `chrome` (bold), `pulsar` (energy), `particles` (ambient), `fireworks` (celebration).
+
+### Apply Effects to Photos
+
+Process images with ASCII, dither, halftone, or glitch effects for scroll-stopping visuals:
+
+```
+search_images  query: "team photo"  orientation: "square"  limit: 1
+add_node
+  parentId: "<artboard-id>"
+  type: "shader"
+  inputType: "image"
+  mediaInput: { mediaUrl: "<url>", mediaType: "image", objectFit: "cover" }
+  effectId: "ascii-standard"
+  effectEnabled: true
+  className: "w-full h-full"
+```
+
+**Best effects for social**: `ascii-standard` (tech/dev content), `dither-atkinson` (retro), `halftone-mono` (print/zine), `glitch-vhs` (nostalgic), `art-kuwahara` (painterly), `glitch-digital` (edgy).
+
+### Post-Processes
+
+Add film grain, vignette, or scanlines for texture:
+
+```
+postProcesses: [
+  { type: "grain", enabled: true, settings: { intensity: 0.3 } },
+  { type: "scanlines", enabled: true, settings: { intensity: 0.2 } }
+]
+```
 
 ---
 
