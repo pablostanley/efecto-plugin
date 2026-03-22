@@ -13,6 +13,12 @@ Works with **Claude Code**, **Cursor**, **Codex**, and any MCP-compatible client
 
 ## Install
 
+### Skills CLI (works with any agent)
+
+```bash
+npx skills add pablostanley/efecto-plugin
+```
+
 ### Claude Code
 
 ```bash
