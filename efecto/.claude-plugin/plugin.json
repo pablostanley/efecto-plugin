@@ -1,10 +1,10 @@
 {
   "name": "efecto",
   "version": "1.0.0",
-  "description": "Efecto design tool — create web pages with AI agents",
+  "description": "Efecto — AI design skills + 46 MCP tools. Create web pages, social media graphics, presentations, and more with AI agents.",
   "author": { "name": "Pablo Stanley" },
   "homepage": "https://efecto.app",
-  "repository": "https://github.com/pablostanley/efecto-app",
+  "repository": "https://github.com/pablostanley/efecto-plugin",
   "license": "MIT",
-  "keywords": ["design", "web-design", "tailwind", "mcp", "efecto"]
+  "keywords": ["design", "web-design", "tailwind", "mcp", "efecto", "skills", "social-media", "graphic-design"]
 }
