@@ -70,7 +70,7 @@ Every design starts with a session:
 ```
 create_session  label: "Pitch Deck"
 ```
-Returns `{ sessionId, designUrl }`. Tell the user to open the URL, then poll `session_status` until `browserConnected: true`.
+Returns `{ sessionId, documentId, designUrl }`. Tell the user to open the URL, then poll `session_status` until `browserConnected: true`.
 
 ### Building Designs
 

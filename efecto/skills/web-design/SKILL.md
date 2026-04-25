@@ -77,7 +77,7 @@ Sessions expire after 15 minutes of inactivity. The browser must be connected be
 create_session
   label: "Landing page design"
 ```
-Returns `{ sessionId, designUrl }`. Tell the user to open the URL. The session ID is stored automatically — all subsequent tools use it.
+Returns `{ sessionId, documentId, designUrl }`. Tell the user to open the URL. The session ID is stored automatically — all subsequent tools use it.
 
 ### Step 2: Wait for Browser Connection
 ```
