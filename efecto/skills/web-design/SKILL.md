@@ -79,11 +79,19 @@ create_session
 ```
 Returns `{ sessionId, documentId, designUrl }`. Tell the user to open the URL. The session ID is stored automatically — all subsequent tools use it.
 
+**Do not call `create_session` again to "reconnect".** A second call refuses to overwrite a paired session unless you pass `force: true`. If a tool ever errors with `A paired session is already active`, just keep using the existing session — pass its `sessionId` explicitly if needed.
+
 ### Step 2: Wait for Browser Connection
 ```
-session_status
+wait_for_connection
 ```
-Poll until `browserConnected: true`. The browser must be open before you can push tools.
+Blocks until the browser opens the URL and pairs (default 120s). Returns immediately if already paired.
+
+To inspect routing state at any time:
+```
+session_status                # legacy single-session shape (sessionId, paired, browserConnected, knownSessions)
+session_status { all: true }  # list shape — all sessions in this MCP process with isActive / paired flags
+```
 
 ### Step 3: Create an Artboard
 ```
@@ -138,9 +146,10 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 | Tool | Purpose |
 |------|---------|
 | `get_selection` | Returns currently selected nodes/artboards with JSX subtrees |
-| `get_document` | Returns full document as JSX with data-id attributes |
+| `get_document` | Returns document as JSX. Scoped modes (preferred on large docs): `outline: true` (one-line summary per top-level child), `artboardId` (single artboard), `maxDepth` (cap descent; 0 = artboard header only, 1 = top-level children only). Response includes an approx-token count. |
 | `list_artboards` | Lists all artboards with IDs, names, dimensions |
-| `find_nodes` | Search nodes by name, text content, type, or className |
+| `find_nodes` | Search nodes by name, text content, type, or className. Returns IDs without subtree — use this to locate before calling `get_node_tree`. |
+| `get_node_tree` | Serializes one node/artboard subtree only — drill in after `outline` or `find_nodes`. |
 
 ### Creating Content
 
