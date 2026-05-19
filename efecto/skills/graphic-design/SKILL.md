@@ -50,7 +50,7 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-Once installed, you'll have access to 46 design tools plus a standalone image search tool. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
+Once installed, you'll have access to 61 design tools plus a standalone image search tool. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
 
 ### How It Works
 
@@ -96,7 +96,7 @@ batch_update  updates: [
 ]
 ```
 
-### All 46 Tools
+### All 61 Tools
 
 | Category | Tools |
 |----------|-------|
