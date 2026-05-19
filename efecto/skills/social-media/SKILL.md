@@ -115,6 +115,10 @@ batch_update  updates: [
 | **Theme** | `get_theme`, `set_theme`, `set_theme_mode`, `reset_theme` |
 | **Quality** | `audit_design`, `repair_design` |
 
+**Scoped reads (large docs).** `get_document` returns the whole tree by default — on multi-artboard carousels that can blow past tool-result token caps. Prefer scoped modes: `outline: true` (one-line summary per top-level child), `artboardId: "..."` (single slide), `maxDepth: N` (cap descent; 0 = artboard header only, 1 = top-level children). Response includes an approx-token count so you can decide whether to widen. Drill into a subtree with `get_node_tree` after.
+
+**Routing inspection.** `session_status` returns the legacy single-session shape by default (sessionId, paired, browserConnected, knownSessions). Pass `{ all: true }` for the list shape — every session in this MCP process with isActive/paired flags.
+
 ### JSX Format for `add_section`
 
 Write standard HTML tags with Tailwind `className`. The tag determines the node type:
