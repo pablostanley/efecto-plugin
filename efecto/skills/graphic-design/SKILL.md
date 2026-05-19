@@ -103,7 +103,7 @@ batch_update  updates: [
 | **Session** | `create_session`, `wait_for_connection`, `session_status`, `close_session` |
 | **Reading** | `get_document`, `get_selection`, `get_node_tree`, `list_artboards`, `find_nodes` |
 | **Creating** | `create_artboard`, `add_section`, `add_node` |
-| **Modifying** | `update_node`, `update_class`, `update_artboard`, `batch_update`, `replace_section` |
+| **Modifying** | `update_node`, `update_class`, `update_artboard` (now accepts `speakerNotes` for slides), `batch_update`, `replace_section` |
 | **Organizing** | `move_node`, `duplicate_node`, `duplicate_artboard`, `group_nodes`, `ungroup_node`, `reorder_node` |
 | **Selection** | `select_nodes`, `deselect_all`, `set_visibility`, `delete_nodes`, `delete_artboard` |
 | **Alignment** | `align_nodes`, `distribute_nodes` |
@@ -113,6 +113,10 @@ batch_update  updates: [
 | **History** | `undo`, `redo` |
 | **Theme** | `get_theme`, `set_theme`, `set_theme_mode`, `reset_theme` |
 | **Quality** | `audit_design`, `repair_design` |
+
+**Scoped reads (large docs).** `get_document` returns the whole tree by default — on multi-artboard docs that can blow past tool-result token caps. Prefer scoped modes: `outline: true` (one-line summary per top-level child), `artboardId: "..."` (single artboard), `maxDepth: N` (cap descent; 0 = artboard header only, 1 = top-level children). Response includes an approx-token count so you can decide whether to widen. Drill into a subtree with `get_node_tree` after.
+
+**Routing inspection.** `session_status` returns the legacy single-session shape by default (sessionId, paired, browserConnected, knownSessions). Pass `{ all: true }` for the list shape — every session in this MCP process with isActive/paired flags.
 
 ### JSX Format for `add_section`
 
@@ -332,6 +336,30 @@ The common thread: **less is more.** Every element must earn its place.
 8. **Team** — Founders + key hires (photos + one-line bios)
 9. **Ask** — What you need (funding amount, partnerships)
 10. **Closing** — Contact info, thank you
+
+### Speaker Notes
+
+Every slide artboard has a `speakerNotes` field — plain text the presenter sees in Efecto's Present + Control mode. Set it whenever you author a slide.
+
+- Pass `speakerNotes` to `create_artboard` and `update_artboard`.
+- Read existing notes via `list_artboards` (the field appears in the result) or `get_document` (rendered as a `speakerNotes="..."` attribute on the Artboard tag).
+- Write the speaker's **script**, not the slide content. The slide is the headline; the notes are what gets said out loud.
+- 2–4 sentences per slide. Anchor the point + transition to the next slide.
+- Leave blank when the slide is self-explanatory (title cards, one-word statement slides).
+
+```
+create_artboard:
+  name: "03 — Traction"
+  width: 1920
+  height: 1080
+  backgroundColor: "#0a0a0a"
+  className: "flex flex-col"
+  speakerNotes: "Walk through the 3x ARR growth. Highlight that 80% came from enterprise upgrades, not net-new logos. Set up the next slide on retention by saying 'and the reason this is durable is...'."
+```
+
+### Presentation Playback
+
+The end user launches a deck from the Play dropdown in Efecto: **Prototype** (in-app emulator), **Present** (single-window fullscreen), or **Present + Control** (audience window + speaker controller with current slide, next slide, notes, timer). Slide order follows the layer-panel order by default; the controller has a visual (y, x) toggle for spatially-laid-out decks. Your job is to author slides + notes — the user picks playback mode.
 
 ---
 
