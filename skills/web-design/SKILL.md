@@ -66,7 +66,7 @@ Agent <──poll/response── Server <──POST── Browser (returns resul
 3. You push tool calls — each one executes in the browser and returns a result
 4. The user sees every change live as you build the design
 
-Sessions expire after 15 minutes of inactivity. The browser must be connected before tool calls can execute.
+Sessions expire after 2 hours of inactivity. The browser must be connected before tool calls can execute. If you restart or lose the MCP process, call `attach_session` with the user's current Efecto URL instead of creating a duplicate session.
 
 ---
 
@@ -79,7 +79,13 @@ create_session
 ```
 Returns `{ sessionId, documentId, designUrl }`. Tell the user to open the URL. The session ID is stored automatically — all subsequent tools use it.
 
-**Do not call `create_session` again to "reconnect".** A second call refuses to overwrite a paired session unless you pass `force: true`. If a tool ever errors with `A paired session is already active`, just keep using the existing session — pass its `sessionId` explicitly if needed.
+If the user already has an Efecto URL with `?session=...`, resume it:
+```
+attach_session
+  designUrl: "https://efecto.app/design/<file-id>/untitled?session=<session-id>"
+```
+
+**Do not call `create_session` again to "reconnect".** Use `attach_session` for an existing URL. A second `create_session` call refuses to overwrite a paired session unless you pass `force: true`.
 
 ### Step 2: Wait for Browser Connection
 ```
@@ -139,7 +145,7 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 
 ---
 
-## The 61 Design Tools
+## The Design Tools
 
 ### Reading State
 
@@ -1094,7 +1100,7 @@ create_session
   label: "SaaS Landing Page"
 ```
 
-Wait for browser connection (`session_status`), then:
+If resuming an open Efecto URL, use `attach_session` instead. Wait for browser connection (`wait_for_connection`), then:
 
 ```
 create_artboard:

@@ -70,7 +70,7 @@ Every design starts with a session:
 ```
 create_session  label: "Pitch Deck"
 ```
-Returns `{ sessionId, documentId, designUrl }`. Tell the user to open the URL, then call `wait_for_connection` (blocks until paired). Never call `create_session` twice to "reconnect" — a paired session refuses overwrite without `force: true`. Use `session_status` to inspect routing (`{ all: true }` for the full session list).
+Returns `{ sessionId, documentId, designUrl }`. Tell the user to open the URL, then call `wait_for_connection` (blocks until paired). If the user already has an Efecto URL with `?session=...`, call `attach_session` with that URL instead of creating a duplicate session. Never call `create_session` twice to "reconnect" — a paired session refuses overwrite without `force: true`. Use `session_status` to inspect routing (`{ all: true }` for the full session list).
 
 ### Building Designs
 
@@ -96,11 +96,11 @@ batch_update  updates: [
 ]
 ```
 
-### All 61 Tools
+### All 66 Tools
 
 | Category | Tools |
 |----------|-------|
-| **Session** | `create_session`, `wait_for_connection`, `session_status`, `close_session` |
+| **Session** | `create_session`, `attach_session`, `wait_for_connection`, `session_status`, `close_session` |
 | **Reading** | `get_document`, `get_selection`, `get_node_tree`, `list_artboards`, `find_nodes` |
 | **Creating** | `create_artboard`, `add_section`, `add_node` |
 | **Modifying** | `update_node`, `update_class`, `update_artboard` (now accepts `speakerNotes` for slides), `batch_update`, `replace_section` |
@@ -116,7 +116,7 @@ batch_update  updates: [
 
 **Scoped reads (large docs).** `get_document` returns the whole tree by default — on multi-artboard docs that can blow past tool-result token caps. Prefer scoped modes: `outline: true` (one-line summary per top-level child), `artboardId: "..."` (single artboard), `maxDepth: N` (cap descent; 0 = artboard header only, 1 = top-level children). Response includes an approx-token count so you can decide whether to widen. Drill into a subtree with `get_node_tree` after.
 
-**Routing inspection.** `session_status` returns the legacy single-session shape by default (sessionId, paired, browserConnected, knownSessions). Pass `{ all: true }` for the list shape — every session in this MCP process with isActive/paired flags.
+**Routing inspection.** `session_status` returns the legacy single-session shape by default (sessionId, paired, browserConnected, knownSessions). Pass `{ all: true }` for the list shape — every session in this MCP process with isActive/paired flags. If this MCP process restarted, `attach_session` with the current browser URL makes that session active again.
 
 ### JSX Format for `add_section`
 
