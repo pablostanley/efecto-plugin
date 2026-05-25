@@ -10,13 +10,13 @@ Install skills + MCP tools:
 npx skills add pablostanley/efecto-plugin
 ```
 
-This installs 3 design skills and configures the Efecto MCP server with 46 design tools.
+This installs 3 design skills and configures the Efecto MCP server with 69 tools.
 
 ## MCP Server
 
-The Efecto MCP server gives you 46 tools to create and modify designs in real-time:
+The Efecto MCP server gives you 69 tools to create, modify, animate, and export designs in real-time:
 
-- **Session**: `create_session`, `wait_for_connection`, `session_status`, `close_session`
+- **Session**: `create_session`, `attach_session`, `wait_for_connection`, `session_status`, `close_session`
 - **Reading**: `get_document`, `get_selection`, `get_node_tree`, `list_artboards`, `find_nodes`
 - **Creating**: `create_artboard`, `add_section`, `add_node`
 - **Modifying**: `update_node`, `update_class`, `update_artboard`, `batch_update`, `replace_section`
@@ -29,6 +29,7 @@ The Efecto MCP server gives you 46 tools to create and modify designs in real-ti
 - **History**: `undo`, `redo`
 - **Theme**: `get_theme`, `set_theme`, `set_theme_mode`, `reset_theme`
 - **Quality**: `audit_design`, `repair_design`
+- **Animation**: `list_animation_presets`, `apply_animation_plan`, `clear_animations`
 
 ## Workflow
 
@@ -50,5 +51,5 @@ The 3 installed skills provide design knowledge:
 ## Documentation
 
 - Full docs: https://efecto.app/docs
-- All 46 tools: https://efecto.app/docs/tools
+- All 69 tools: https://efecto.app/docs/tools
 - Skills guide: https://efecto.app/docs/skills

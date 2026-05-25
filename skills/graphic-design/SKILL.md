@@ -50,7 +50,7 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-Once installed, you'll have access to 61 design tools plus a standalone image search tool. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
+Once installed, you'll have access to 69 MCP tools, including image search and native animation authoring. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
 
 ### How It Works
 
@@ -96,14 +96,15 @@ batch_update  updates: [
 ]
 ```
 
-### All 66 Tools
+### All 69 Tools
 
 | Category | Tools |
 |----------|-------|
 | **Session** | `create_session`, `attach_session`, `wait_for_connection`, `session_status`, `close_session` |
 | **Reading** | `get_document`, `get_selection`, `get_node_tree`, `list_artboards`, `find_nodes` |
 | **Creating** | `create_artboard`, `add_section`, `add_node` |
-| **Modifying** | `update_node`, `update_class`, `update_artboard` (now accepts `speakerNotes` for slides), `batch_update`, `replace_section` |
+| **Modifying** | `update_node`, `update_class`, `update_artboard` (accepts `speakerNotes` for slides and `timelineDuration` for animation), `batch_update`, `replace_section` |
+| **Animation** | `list_animation_presets`, `apply_animation_plan`, `clear_animations` |
 | **Organizing** | `move_node`, `duplicate_node`, `duplicate_artboard`, `group_nodes`, `ungroup_node`, `reorder_node` |
 | **Selection** | `select_nodes`, `deselect_all`, `set_visibility`, `delete_nodes`, `delete_artboard` |
 | **Alignment** | `align_nodes`, `distribute_nodes` |
@@ -217,6 +218,16 @@ add_node
 ```
 
 **Best for**: Presentation backgrounds, poster visuals, event graphics, blog hero images, OG cards with distinctive visual treatments.
+
+---
+
+## Native Animation
+
+Graphic assets can use native Efecto layer animations when the user asks for motion, slides, reels, or presentation playback. Do not use Tailwind `animate-*`, `transition-*`, or `duration-*` classes.
+
+Workflow: inspect the target, call `list_animation_presets`, then apply a compact plan with `apply_animation_plan`. Animate hierarchy first: background or hero visual, headline, supporting detail, CTA or event details, then secondary ornaments. Use `update_artboard` with `timelineDuration` when the motion needs a deliberate ending.
+
+Good defaults: 0.35-0.6s for hero/title motion, 0.18-0.35s for smaller details, 0.04-0.12s stagger, `ease-out` entrances, `ease-in` exits. For title text, use `appearBy: "word"` or `"line"`; reserve `"char"` for kinetic poster moments.
 
 ---
 

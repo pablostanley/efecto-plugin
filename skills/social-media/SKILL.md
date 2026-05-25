@@ -50,7 +50,7 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-Once installed, you'll have access to 61 design tools plus a standalone image search tool. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
+Once installed, you'll have access to 69 MCP tools, including image search and native animation authoring. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
 
 ### How It Works
 
@@ -97,7 +97,7 @@ batch_update  updates: [
 ]
 ```
 
-### All 66 Tools
+### All 69 Tools
 
 | Category | Tools |
 |----------|-------|
@@ -105,6 +105,7 @@ batch_update  updates: [
 | **Reading** | `get_document`, `get_selection`, `get_node_tree`, `list_artboards`, `find_nodes` |
 | **Creating** | `create_artboard`, `add_section`, `add_node` |
 | **Modifying** | `update_node`, `update_class`, `update_artboard`, `batch_update`, `replace_section` |
+| **Animation** | `list_animation_presets`, `apply_animation_plan`, `clear_animations` |
 | **Organizing** | `move_node`, `duplicate_node`, `duplicate_artboard`, `group_nodes`, `ungroup_node`, `reorder_node` |
 | **Selection** | `select_nodes`, `deselect_all`, `set_visibility`, `delete_nodes`, `delete_artboard` |
 | **Alignment** | `align_nodes`, `distribute_nodes` |
@@ -212,6 +213,16 @@ postProcesses: [
   { type: "scanlines", enabled: true, settings: { intensity: 0.2 } }
 ]
 ```
+
+---
+
+## Native Animation
+
+Social posts, stories, reels, and carousel slides can use native Efecto layer animations. Do not use Tailwind `animate-*`, `transition-*`, or `duration-*` classes.
+
+Workflow: inspect the selected artboard or nodes, call `list_animation_presets`, then use `apply_animation_plan`. Animate the hook first: background/photo, hero headline, supporting line, swipe cue or CTA, then decorative details. For carousel/story motion, add exits only when the user asks for an outro or a video-style sequence.
+
+Good defaults: 0.35-0.6s for the headline or hero image, 0.18-0.35s for badges/icons/details, 0.04-0.1s stagger. Use `pop-spark`, `bounce-in`, `mask-reveal`, or `iris-reveal` when the brand needs thumb-stopping energy; otherwise keep it to `fade-in`, `slide-in`, and `scale-in`.
 
 ---
 
