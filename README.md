@@ -10,7 +10,7 @@ Works with **Claude Code**, **Cursor**, **Windsurf**, **GitHub Copilot**, **Code
 npx skills add pablostanley/efecto-plugin
 ```
 
-This installs **3 design skills** (knowledge) + **69 MCP tools** (actions). Your AI agent gets both the taste and the tools.
+This installs **3 design skills** (knowledge) + **68 MCP tools** (actions). Your AI agent gets both the taste and the tools.
 
 <details>
 <summary>Other install methods</summary>
@@ -59,7 +59,7 @@ codex mcp add efecto -- npx -y @efectoapp/mcp
 
 ## What's Included
 
-### 69 MCP Tools
+### 68 MCP Tools
 
 Create sessions, build artboards, add layouts with JSX + Tailwind CSS, modify nodes, animate layers, export images, manage themes, and more. Full programmatic control of the Efecto design canvas.
 
@@ -97,5 +97,5 @@ Just ask your AI to design something:
 - [Efecto App](https://efecto.app)
 - [Documentation](https://efecto.app/docs)
 - [Skills Guide](https://efecto.app/docs/skills)
-- [All 69 Tools](https://efecto.app/docs/tools)
+- [All 68 Tools](https://efecto.app/docs/tools)
 - [MCP Package](https://www.npmjs.com/package/@efectoapp/mcp)

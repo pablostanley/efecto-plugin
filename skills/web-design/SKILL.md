@@ -50,7 +50,7 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-Once installed, you'll have access to 69 MCP tools, including image search and native animation authoring. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
+Once installed, you'll have access to 68 MCP tools, including image search and native animation authoring. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
 
 ---
 
