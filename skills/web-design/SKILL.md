@@ -50,7 +50,7 @@ Add to `.cursor/mcp.json`:
 }
 ```
 
-Once installed, you'll have access to 61 design tools plus a standalone image search tool. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
+Once installed, you'll have access to 68 MCP tools, including image search and native animation authoring. The MCP server connects your agent to the Efecto design canvas at [efecto.app](https://efecto.app).
 
 ---
 
@@ -171,9 +171,17 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 |------|---------|
 | `update_node` | Updates any node property (className, textContent, tag, style, src, link, elementId, etc.) |
 | `update_class` | Shortcut: replaces only className on a node |
-| `update_artboard` | Updates artboard properties (name, size, background, className) |
+| `update_artboard` | Updates artboard properties (name, size, background, className, `timelineDuration`) |
 | `batch_update` | Updates multiple nodes in one call (bulk styling) |
 | `replace_section` | Replaces a node and its children with new JSX |
+
+### Animation
+
+| Tool | Purpose |
+|------|---------|
+| `list_animation_presets` | Lists native Efecto animation presets with ids, categories, defaults, and supported controls |
+| `apply_animation_plan` | Applies a validated multi-layer animation plan in one call |
+| `clear_animations` | Clears native animations from nodes, the selection, an artboard, or the whole document |
 
 ### Organizing Structure
 
@@ -255,6 +263,53 @@ Repeat Steps 4-6 to add more sections, adjust styling, and refine the design. Th
 | Tool | Purpose |
 |------|---------|
 | `search_images` | Search for free stock images (Lummi). No session required. Returns URLs to use with `add_node` or `set_fill`. |
+
+---
+
+## Native Animation — Animate Existing Designs
+
+Efecto has a native layer animation system. Do **not** use Tailwind `animate-*`, `transition-*`, or `duration-*` classes as the animation authoring path.
+
+Workflow for "animate this":
+
+1. Inspect the target with `get_selection`, `get_document`, `get_node_tree`, or `list_artboards`.
+2. Call `list_animation_presets` to see supported preset IDs and settings.
+3. Pick the meaningful layers: hero image, headline, supporting copy, CTA, cards, icons, or product visuals. Avoid animating every nested child.
+4. Call `apply_animation_plan` with timed entries. Use `mode: "replace"` for a new motion system or `mode: "append"` to add exit/outro animations.
+5. Set `timelineDuration` with `update_artboard` when the artboard needs a deliberate playback end.
+6. Use `select_nodes` to highlight the changed layers.
+
+Timing defaults:
+
+- Small UI elements: 0.18-0.35s.
+- Hero/slide elements: 0.35-0.6s.
+- Sibling stagger: 0.04-0.12s.
+- Entrances: `ease-out`.
+- Exits: `ease-in`.
+
+Preset guidance:
+
+- `fade-in`: subtle supporting content.
+- `slide-in`: directional reveals, usually 16-48px.
+- `scale-in`: cards, product shots, badges, modals.
+- `blur-in`: cinematic/editorial reveals.
+- `tilt-in`, `spin-in`, `bounce-in`, `pop-spark`: playful or promotional moments.
+- `mask-reveal`, `iris-reveal`: high-impact hero or title reveals.
+- Exit presets (`fade-out`, `slide-out`, `scale-out`, etc.) should leave enough reading time before they begin.
+
+Text nodes can use `appearBy: "word"` or `"line"` for headline reveals. Use `"char"` only for kinetic title moments; non-text nodes must use `"block"`.
+
+Example:
+
+```
+apply_animation_plan
+  mode: "replace"
+  animations: [
+    { nodeId: "<headline-id>", presetId: "fade-in", offset: 0, settings: { duration: 0.55, easing: "ease-out", appearBy: "word" } },
+    { nodeId: "<hero-image-id>", presetId: "scale-in", offset: 0.08, settings: { duration: 0.5, easing: "ease-out", scaleFrom: 0.96 } },
+    { nodeId: "<cta-id>", presetId: "slide-in", offset: 0.28, settings: { duration: 0.35, easing: "ease-out", direction: "up", distance: 20 } }
+  ]
+```
 
 ---
 
