@@ -294,7 +294,8 @@ Preset guidance:
 - `scale-in`: cards, product shots, badges, modals.
 - `blur-in`: cinematic/editorial reveals.
 - `tilt-in`, `spin-in`, `bounce-in`, `pop-spark`: playful or promotional moments.
-- `mask-reveal`, `iris-reveal`: high-impact hero or title reveals.
+- `mask-in`, `fade-mask-in`, `slide-mask-in`, `scale-mask-in`: high-impact hero, frame, or title reveals. Use `maskStyle: "linear"` for clean wipes, `"diagonal"` for editorial energy, and `"iris"` for spotlit reveals. Use `maskDirection` for edge movement and `maskOrigin` for iris origin.
+- `mask-reveal`, `iris-reveal`: legacy combo aliases that still work, but prefer the explicit mask presets above.
 - Exit presets (`fade-out`, `slide-out`, `scale-out`, etc.) should leave enough reading time before they begin.
 
 Text nodes can use `appearBy: "word"` or `"line"` for headline reveals. Use `"char"` only for kinetic title moments; non-text nodes must use `"block"`.
