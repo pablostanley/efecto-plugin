@@ -227,7 +227,7 @@ Graphic assets can use native Efecto layer animations when the user asks for mot
 
 Workflow: inspect the target, call `list_animation_presets`, then apply a compact plan with `apply_animation_plan`. Animate hierarchy first: background or hero visual, headline, supporting detail, CTA or event details, then secondary ornaments. Use `update_artboard` with `timelineDuration` when the motion needs a deliberate ending.
 
-Good defaults: 0.35-0.6s for hero/title motion, 0.18-0.35s for smaller details, 0.04-0.12s stagger, `ease-out` entrances, `ease-in` exits. For title text, use `appearBy: "word"` or `"line"`; reserve `"char"` for kinetic poster moments.
+Good defaults: 0.35-0.6s for hero/title motion, 0.18-0.35s for smaller details, 0.04-0.12s stagger, `ease-out` entrances, `ease-in` exits. For title text, use `appearBy: "word"` or `"line"`; reserve `"char"` for kinetic poster moments. For poster, slide, and frame reveals, prefer explicit mask presets (`mask-in`, `fade-mask-in`, `slide-mask-in`, `scale-mask-in`) and set `maskStyle`, `maskDirection`, or `maskOrigin` when the reveal shape matters.
 
 ---
 

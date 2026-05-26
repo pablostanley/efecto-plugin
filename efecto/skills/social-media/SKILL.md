@@ -222,7 +222,7 @@ Social posts, stories, reels, and carousel slides can use native Efecto layer an
 
 Workflow: inspect the selected artboard or nodes, call `list_animation_presets`, then use `apply_animation_plan`. Animate the hook first: background/photo, hero headline, supporting line, swipe cue or CTA, then decorative details. For carousel/story motion, add exits only when the user asks for an outro or a video-style sequence.
 
-Good defaults: 0.35-0.6s for the headline or hero image, 0.18-0.35s for badges/icons/details, 0.04-0.1s stagger. Use `pop-spark`, `bounce-in`, `mask-reveal`, or `iris-reveal` when the brand needs thumb-stopping energy; otherwise keep it to `fade-in`, `slide-in`, and `scale-in`.
+Good defaults: 0.35-0.6s for the headline or hero image, 0.18-0.35s for badges/icons/details, 0.04-0.1s stagger. Use `pop-spark`, `bounce-in`, `mask-in`, `fade-mask-in`, `slide-mask-in`, or `scale-mask-in` when the brand needs thumb-stopping energy; set `maskStyle` to `linear`, `diagonal`, or `iris` and use `maskDirection`/`maskOrigin` when the reveal needs to feel intentional. Otherwise keep it to `fade-in`, `slide-in`, and `scale-in`.
 
 ---
 
