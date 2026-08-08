@@ -81,9 +81,9 @@ The primary workflow is: **create artboard → add sections with JSX → refine 
 create_artboard  name: "Slide 1"  width: 1080  height: 1080  backgroundColor: "#111827"  className: "flex flex-col"
 
 # 2. Add content with JSX
-add_section  parentId: "<artboard-id>"  jsx: '<section className="flex flex-col items-center justify-center gap-8 p-16 w-full h-full">
-  <h1 className="text-7xl font-extrabold text-white text-center leading-none">Stop designing like it&apos;s 2020</h1>
-  <p className="text-xl text-gray-400 font-medium">Swipe for 5 rules -></p>
+add_section  parentId: "<artboard-id>"  jsx: '<section name="Carousel Hook" className="flex flex-col items-center justify-center gap-8 p-16 w-full h-full">
+  <h1 name="Hook Headline" className="text-7xl font-extrabold text-white text-center leading-none">Stop designing like it&apos;s 2020</h1>
+  <p name="Swipe Prompt" className="text-xl text-gray-400 font-medium">Swipe for 5 rules -></p>
 </section>'
 
 # 3. Duplicate artboard for carousel slides
@@ -142,6 +142,13 @@ Icons: `<svg icon="arrow-right" className="w-5 h-5 text-gray-600" />`
 - **Buttons ignore children** — use a flex container with `<span>` + `<svg>` instead
 - **Always add `w-full`** on direct children of artboards
 - **For carousels**: use `duplicate_artboard` to create slides, then `batch_update` to change content per slide
+
+### Required Structure and Quality Gate
+
+- **Name meaningful layers.** Give every section, layout group, card, text block, control, image, and icon a concise semantic `name` attribute (for example, `<section name="Carousel Hook">`, `<div name="Slide Copy">`, `<h1 name="Hook Headline">`). Never ship generic names such as `Frame`, `Text`, or `Icon`; unnamed purely decorative leaves are the only exception.
+- **Declare nested layout.** Every frame with two or more children must explicitly include `flex` or `grid` in `className`, including nested wrappers. Add the matching direction, alignment, gap, and wrapping classes; do not rely on implicit block flow.
+- **Meet WCAG AA contrast.** Normal text must reach 4.5:1 and large text 3:1. Evaluate text against its effective rendered background: use its own background when present, otherwise walk through ancestor frames to the artboard, including opacity/alpha compositing. Resolve semantic theme tokens in the active mode before judging contrast.
+- **Audit until clean.** After building or editing, call `audit_design`. Fix every `contrast`, `implicit-block-container`, and `generic-layer-name` finding with `batch_update` or `replace_section`, then call `audit_design` again. If you use `repair_design`, inspect its changes and re-audit. Do not declare completion until all three finding types are zero, and use `get_document` to confirm meaningful layers retain semantic names.
 
 ---
 

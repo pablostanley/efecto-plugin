@@ -114,12 +114,12 @@ Returns the artboard ID. **Always set className to "flex flex-col"** so children
 ```
 add_section
   parentId: "<artboard-id>"
-  jsx: '<nav className="flex items-center justify-between px-16 py-5 bg-white w-full">
-    <h2 className="text-xl font-bold text-gray-900">Acme</h2>
-    <div className="flex items-center gap-8">
-      <a className="text-sm text-gray-600" href="#">Features</a>
-      <a className="text-sm text-gray-600" href="#">Pricing</a>
-      <button className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg">Get Started</button>
+  jsx: '<nav name="Primary Navigation" className="flex items-center justify-between px-16 py-5 bg-white w-full">
+    <h2 name="Brand Name" className="text-xl font-bold text-gray-900">Acme</h2>
+    <div name="Navigation Links" className="flex items-center gap-8">
+      <a name="Features Link" className="text-sm text-gray-600" href="#">Features</a>
+      <a name="Pricing Link" className="text-sm text-gray-600" href="#">Pricing</a>
+      <button name="Get Started Button" className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg">Get Started</button>
     </div>
   </nav>'
 ```
@@ -1134,6 +1134,13 @@ The auto-fixer adds this, but always include `w-full` on direct children of the 
 
 **Images without `src` get a placeholder**
 If you omit `src`, the system inserts `https://placehold.co/600x400`. Always provide a real src for production designs.
+
+### Required Structure and Quality Gate
+
+- **Name meaningful layers.** Give every section, layout group, card, text block, control, image, and icon a concise semantic `name` attribute (for example, `<section name="Hero">`, `<div name="Hero Copy">`, `<h1 name="Hero Heading">`). Never ship generic names such as `Frame`, `Text`, or `Icon`; unnamed purely decorative leaves are the only exception.
+- **Declare nested layout.** Every frame with two or more children must explicitly include `flex` or `grid` in `className`, including nested wrappers. Add the matching direction, alignment, gap, and wrapping classes; do not rely on implicit block flow.
+- **Meet WCAG AA contrast.** Normal text must reach 4.5:1 and large text 3:1. Evaluate text against its effective rendered background: use its own background when present, otherwise walk through ancestor frames to the artboard, including opacity/alpha compositing. Resolve semantic theme tokens in the active mode before judging contrast.
+- **Audit until clean.** After building or editing, call `audit_design`. Fix every `contrast`, `implicit-block-container`, and `generic-layer-name` finding with `batch_update` or `replace_section`, then call `audit_design` again. If you use `repair_design`, inspect its changes and re-audit. Do not declare completion until all three finding types are zero, and use `get_document` to confirm meaningful layers retain semantic names.
 
 ### Design Tips
 

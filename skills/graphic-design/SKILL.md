@@ -81,9 +81,9 @@ The primary workflow is: **create artboard → add sections with JSX → refine 
 create_artboard  name: "Slide 1"  width: 1920  height: 1080  backgroundColor: "#1a1a1a"  className: "flex flex-col"
 
 # 2. Add content with JSX (most efficient way to build)
-add_section  parentId: "<artboard-id>"  jsx: '<section className="flex flex-col items-center justify-center gap-6 p-24 w-full h-full">
-  <h1 className="text-7xl font-extrabold text-white text-center">Your Title Here</h1>
-  <p className="text-2xl text-gray-400">Subtitle text</p>
+add_section  parentId: "<artboard-id>"  jsx: '<section name="Title Slide" className="flex flex-col items-center justify-center gap-6 p-24 w-full h-full">
+  <h1 name="Presentation Title" className="text-7xl font-extrabold text-white text-center">Your Title Here</h1>
+  <p name="Presentation Subtitle" className="text-2xl text-gray-400">Subtitle text</p>
 </section>'
 
 # 3. Read current state to get node IDs
@@ -140,6 +140,13 @@ Icons: `<svg icon="arrow-right" className="w-5 h-5 text-gray-600" />`
 - **Use `grow` instead of `flex-1`** — `flex-1` doesn't work in Efecto
 - **Buttons ignore children** — use a flex container with `<span>` + `<svg>` instead
 - **Always add `w-full`** on direct children of artboards
+
+### Required Structure and Quality Gate
+
+- **Name meaningful layers.** Give every section, layout group, card, text block, control, image, and icon a concise semantic `name` attribute (for example, `<section name="Title Slide">`, `<div name="Metric Group">`, `<h1 name="Presentation Title">`). Never ship generic names such as `Frame`, `Text`, or `Icon`; unnamed purely decorative leaves are the only exception.
+- **Declare nested layout.** Every frame with two or more children must explicitly include `flex` or `grid` in `className`, including nested wrappers. Add the matching direction, alignment, gap, and wrapping classes; do not rely on implicit block flow.
+- **Meet WCAG AA contrast.** Normal text must reach 4.5:1 and large text 3:1. Evaluate text against its effective rendered background: use its own background when present, otherwise walk through ancestor frames to the artboard, including opacity/alpha compositing. Resolve semantic theme tokens in the active mode before judging contrast.
+- **Audit until clean.** After building or editing, call `audit_design`. Fix every `contrast`, `implicit-block-container`, and `generic-layer-name` finding with `batch_update` or `replace_section`, then call `audit_design` again. If you use `repair_design`, inspect its changes and re-audit. Do not declare completion until all three finding types are zero, and use `get_document` to confirm meaningful layers retain semantic names.
 
 ---
 
